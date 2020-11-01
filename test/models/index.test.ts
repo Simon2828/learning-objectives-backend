@@ -1,11 +1,7 @@
-// import * as db from "./../../src/db/db";
-// import { assert } from 'chai';
+import {transformLearningObjectives} from '../../src/models';
+import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { Pool } from "pg";
-import postgresCredentials from "../../credentials.json";
-
-const connectionString = postgresCredentials.postgres.connectionString;
-const dbClient = new Pool({ connectionString });
+import * as db from '../../src/db/db';
 
 const sandbox = sinon.createSandbox();
 
@@ -315,7 +311,21 @@ const oneLearningObjectiveInData = [
     "loId": "learningObjective1",
     "stepId": "stepToSuccess1",
     "loAchieved": false
-  }
+  },
+  {
+    "lo": "Write an introduction.",
+    "step": "Describe the setting.",
+    "loId": "learningObjective1",
+    "stepId": "stepToSuccess2",
+    "loAchieved": false
+  },
+  {
+    "lo": "Write an introduction.",
+    "step": "Use at least three adjectives.",
+    "loId": "learningObjective1",
+    "stepId": "stepToSuccess3",
+    "loAchieved": false
+  },
 ];
 
 const oneExpectedLearningObjective = {
@@ -331,29 +341,17 @@ const oneExpectedLearningObjective = {
   }
 };
 
-const queryArg = `
-SELECT learning_objectives.title AS lo, steps_to_success.step_to_success AS step,
-learning_objectives.learning_objective_id AS lo_id, steps_to_success.step_to_success_id AS step_id,
-learning_objectives.achieved AS lo_achieved
-FROM learning_steps
-  INNER JOIN learning_objectives
-    ON learning_steps.learning_objective_id = learning_objectives.learning_objective_id
-  INNER JOIN steps_to_success
-    ON learning_steps.step_to_success_id = steps_to_success.step_to_success_id;
-`
+describe('model', () => {
+  let allLearningObjectivesStub = sandbox.stub(db, 'getAllLearningObjectives');
+  it('should return the transformed learning objectives with one learning objective', async () => {
+    allLearningObjectivesStub.resolves(oneLearningObjectiveInData);
+    const transformedLearningObjectives = await transformLearningObjectives();
+    assert.deepEqual(transformedLearningObjectives, oneExpectedLearningObjective);
+  })
 
-
-// describe("database", () => {
-//   let dbClientQueryStub = sandbox.stub(dbClient, 'query');
-//   it('should transform the first learning objective from the database into the correct shape', async () => {
-//     // need to stub out dbClient.query.. not working, maybe try abstracting db from transformation: eg https://stackoverflow.com/questions/54887149/how-to-mock-pg-pool-with-sinon
-//     dbClientQueryStub.resolves(oneLearningObjectiveInData[0]);
-//     const oneLo = await db.getAllLearningObjectives();
-//     assert.deepEqual(oneLo, oneExpectedLearningObjective);
-//   })
-//   it("should fetch all learning objectives", async () => {
-//     const lOs  = await db.getAllLearningObjectives();
-//     // console.log(JSON.stringify(lOs, null, 2))
-//     assert.isObject(lOs.learningObjectives.byId);
-//   });
-// });
+  it.only('should return the transformed learning objectives', async () => {
+    allLearningObjectivesStub.resolves(data);
+    const transformedLearningObjectives = await transformLearningObjectives();
+    assert.deepEqual(transformedLearningObjectives, expected);
+  })
+})
