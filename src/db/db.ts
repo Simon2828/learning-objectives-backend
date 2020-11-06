@@ -39,28 +39,4 @@ export const getAllLearningObjectives = async () => {
 
   `);
     return rows;
-
-
-//   return rows.map((row) => {
-//     console.log("getAllLearningObjectives -> row", row)
-
-//     return _.mapKeys(row, (value, key) => {
-//       return _.camelCase(key);
-//     });
-//   }).reduce((acc, curr, i) => {
-//     console.log('acc: ', acc)
-//     // logic for if acc.loId = curr.loId, then don't update acc.loId, but do push to stepIds
-//     acc = {
-//       learningObjectives: {
-//         byId: {
-//           [acc.loId]: {
-//             id:''
-
-//           }
-//         }
-//       }
-//     };
-//     // acc.learningObjectives.byId = acc.loId;
-//     return acc;
-// });
 }

@@ -274,16 +274,6 @@ const expected = {
         stepToSuccess: "Use time connectives.",
         achieved: false
       },
-      "stepToSuccess13": {
-        id: "stepToSuccess13",
-        stepToSuccess: "Begin the direct speech with a capital letter",
-        achieved: false
-      },
-      "stepToSuccess14": {
-        id: "stepToSuccess14",
-        stepToSuccess: "Use lowercase letters when....",
-        achieved: false
-      },
       "stepToSuccess15": {
         id: "stepToSuccess15",
         stepToSuccess: "Include who, what, where and when",
@@ -294,13 +284,8 @@ const expected = {
         stepToSuccess: "Describe people, places and things",
         achieved: false
       },
-      "stepToSuccess17": {
-        id: "stepToSuccess17",
-        stepToSuccess: "todo",
-        achieved: false
-      },
     },
-    allIds: ["stepToSuccess1", "stepToSuccess2", "stepToSuccess3", "stepToSuccess4", "stepToSuccess5", "stepToSuccess6", "stepToSuccess7", "stepToSuccess8","stepToSuccess9", "stepToSuccess10", "stepToSuccess11", "stepToSuccess12", "stepToSuccess13", "stepToSuccess14", "stepToSuccess15", "stepToSuccess16","stepToSuccess17"]
+    allIds: ["stepToSuccess1", "stepToSuccess2", "stepToSuccess3", "stepToSuccess4", "stepToSuccess5", "stepToSuccess6", "stepToSuccess7", "stepToSuccess8","stepToSuccess9", "stepToSuccess10", "stepToSuccess11", "stepToSuccess12", "stepToSuccess15", "stepToSuccess16"]
   }
 }
 
@@ -343,13 +328,13 @@ const oneExpectedLearningObjective = {
 
 describe('model', () => {
   let allLearningObjectivesStub = sandbox.stub(db, 'getAllLearningObjectives');
-  it('should return the transformed learning objectives with one learning objective', async () => {
-    allLearningObjectivesStub.resolves(oneLearningObjectiveInData);
-    const transformedLearningObjectives = await transformLearningObjectives();
-    assert.deepEqual(transformedLearningObjectives, oneExpectedLearningObjective);
-  })
+  // it('should return the transformed learning objectives with one learning objective', async () => {
+  //   allLearningObjectivesStub.resolves(oneLearningObjectiveInData);
+  //   const transformedLearningObjectives = await transformLearningObjectives();
+  //   assert.deepEqual(transformedLearningObjectives, oneExpectedLearningObjective);
+  // })
 
-  it.only('should return the transformed learning objectives', async () => {
+  it('should return the transformed learning objectives', async () => {
     allLearningObjectivesStub.resolves(data);
     const transformedLearningObjectives = await transformLearningObjectives();
     assert.deepEqual(transformedLearningObjectives, expected);

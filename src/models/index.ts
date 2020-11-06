@@ -12,43 +12,37 @@ export async function transformLearningObjectives(): Promise<any> {
      return _.camelCase(key);
    });
  }).reduce((acc, curr, i) => {
-console.log('acc::', JSON.stringify(acc, null, 2))
-console.log('curr::', curr)
-// https://stackoverflow.com/questions/32722435/push-wont-work-as-expected-in-reduce
-
-   // acc.learningObjectives.byId = acc.loId;)
-
-  //  let loIdInCurr = acc.learningObjectives.byId[curr.loId];
-
-  //   if (loIdInCurr !== curr.loId) {
-  //     acc.learningObjectives.byId = { [curr.loId] : {
-  //       stepsToSuccess: []
-  //     }
-  //   }
-  // }
-  // console.log('acc.learningObjectives.byId[curr.loId]: ', acc.learningObjectives.byId[curr.loId])
-
-  // searchh
-
-  // let loId: string | undefined = acc.learningObjectives?.byId[curr.loId].id;
-
+    if (!acc.learningObjectives.allIds.includes(curr.loId) && i > 0) {
+      acc.learningObjectives.byId = { ...acc.learningObjectives.byId, [curr.loId] : {
+        stepsToSuccess: [],
+        id: curr.loId
+      }
+    }
+  }
 
   if (curr.loId === acc.learningObjectives.byId[curr.loId].id || i === 0) {
-     //TODO - else logic for new curr.loId
      acc.learningObjectives.byId[curr.loId].title = curr.lo;
      acc.learningObjectives.byId[curr.loId].achieved = curr.loAchieved;
      acc.learningObjectives.byId[curr.loId].id = curr.loId;
-     acc.learningObjectives.byId[curr.loId].stepsToSuccess = [...acc.learningObjectives.byId.learningObjective1.stepsToSuccess, curr.stepId];
-    acc.learningObjectives.allIds = [...acc.learningObjectives.allIds, curr.loId]; // TODO - allIds filter...
+
+     acc.learningObjectives.byId[curr.loId].stepsToSuccess = [...acc.learningObjectives.byId[curr.loId].stepsToSuccess, curr.stepId];
+     if (!acc.learningObjectives.allIds.includes(curr.loId)) {
+       acc.learningObjectives.allIds = [...acc.learningObjectives.allIds, curr.loId];
+     }
    }
 
-  //  else {
-  //   acc.learningObjectives.byId[curr.loId].title = curr.lo;
-  //   acc.learningObjectives.byId[curr.loId].achieved = curr.loAchieved;
-  //   acc.learningObjectives.byId[curr.loId].id = curr.loId;
-  //   acc.learningObjectives.byId[curr.loId].stepsToSuccess = [...acc.learningObjectives.byId.learningObjective1.stepsToSuccess, curr.stepId];
-  //  }
-  //  console.log('acc: ', JSON.stringify(acc, null, 2));
+   // check if step to success id is already in allIds
+   if (!acc.stepsToSuccess.allIds.includes(curr.stepId)) {
+    acc.stepsToSuccess.byId = {
+      ...acc.stepsToSuccess.byId, [curr.stepId] : {
+        id: curr.stepId,
+        stepToSuccess: curr.step,
+        achieved: false
+      }
+    }
+    acc.stepsToSuccess.allIds = [...acc.stepsToSuccess.allIds, curr.stepId];
+  }
+
   return acc;
 }, {
   learningObjectives: {
@@ -57,6 +51,10 @@ console.log('curr::', curr)
         stepsToSuccess: []
       }
     },
+    allIds: []
+  },
+  stepsToSuccess: {
+    byId: {},
     allIds: []
   }
 });
