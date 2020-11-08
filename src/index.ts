@@ -6,18 +6,17 @@
 // const express = require("express");
 import express from "express";
 import * as bodyParser from "body-parser";
-const multiparty = require("multiparty");
 const cors = require("cors");
 
 // const handlers = require("./lib/handlers");
 
-const credentials = require("./credentials");
+// const credentials = require("./credentials");
 
-require("./db");
+// require("./db");
 
 const app = express();
 
-app.use("/api", cors());
+// app.use("/api", cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,14 +24,6 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3033;
 
 app.use(express.static(__dirname + "/public"));
-
-// app.get("/api/vacations", handlers.getVacationsApi);
-// app.get("/api/vacation/:sku", handlers.getVacationBySkuApi);
-// app.post(
-//   "/api/vacation/:sku/notify-when-in-season",
-//   handlers.addVacationInSeasonListenerApi
-// );
-// app.delete("/api/vacation/:sku", handlers.requestDeleteVacationApi);
 
 if (require.main === module) {
   //  work out what this does...

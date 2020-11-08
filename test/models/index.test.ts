@@ -326,6 +326,10 @@ const oneExpectedLearningObjective = {
   }
 };
 
+const newLearningObjective = {
+  learningObjective = 'Write something new',
+  title = "", achieved, teacherId}
+
 describe('model', () => {
   let allLearningObjectivesStub = sandbox.stub(db, 'getAllLearningObjectives');
   // it('should return the transformed learning objectives with one learning objective', async () => {
@@ -338,5 +342,9 @@ describe('model', () => {
     allLearningObjectivesStub.resolves(data);
     const transformedLearningObjectives = await transformLearningObjectives();
     assert.deepEqual(transformedLearningObjectives, expected);
+  })
+
+  it('should add a learning objective', async() => {
+    //
   })
 })

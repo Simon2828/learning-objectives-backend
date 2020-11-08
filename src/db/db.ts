@@ -1,3 +1,4 @@
+import { LearningObjective } from './db';
 import { Pool } from "pg";
 import _, { camelCase } from "lodash";
 
@@ -39,4 +40,17 @@ export const getAllLearningObjectives = async () => {
 
   `);
     return rows;
+}
+
+export const addLearningObjective = async ({learningObjectiveId, title, achieved, teacherId}) => {
+  // need to get learning objective id from state on front end... or make learning_objective_id unique primary key
+  const text = `INSERT INTO learning_objectives(learning_objective_id, title, achieved, false, teacher_id)
+                VALUES($1, $2, $3, $4, $5)`
+  const values = [learningObjectiveId, title, achieved, teacherId];
+  try {
+    await dbClient.query(text, values);
+   }
+  catch (err) {
+   console.log(err.stack)
+ }
 }

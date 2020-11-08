@@ -20,6 +20,7 @@
     "chai": "^4.2.0",
     "mocha": "^8.2.0",
     "sinon": "^9.2.0",
+    "supertest": "^6.0.1",
     "ts-node": "^9.0.0",
     "typescript": "^3.7.5"
   },
@@ -29,6 +30,7 @@
     "@types/lodash": "^4.14.162",
     "@types/pg": "^7.14.5",
     "@types/sinon": "^9.0.8",
+    "@types/supertest": "^2.0.10",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "pg": "^8.4.1"
