@@ -7,6 +7,7 @@
 import express from "express";
 import * as bodyParser from "body-parser";
 const cors = require("cors");
+import routes from './routes';
 
 // const handlers = require("./lib/handlers");
 
@@ -24,6 +25,8 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3033;
 
 app.use(express.static(__dirname + "/public"));
+
+app.use('/learning-objectives', routes.learningObjectives);
 
 if (require.main === module) {
   //  work out what this does...

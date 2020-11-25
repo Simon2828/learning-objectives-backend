@@ -8,126 +8,126 @@
 // const learningObjectivesSeed: learningObjectivesSeedConfig[] = [
   let learningObjectivesSeed = [
     {
-        id: "learningObjective1",
+        id: 1,
         title: "Write an introduction.",
-        stepsToSuccess: ["stepToSuccess1", "stepToSuccess2", "stepToSuccess3"],
+        stepsToSuccess: [1, 2, 3],
         achieved: false
     },
     {
-        id: "learningObjective2",
+        id: 2,
         title: "Write a build up.",
-        stepsToSuccess: ["stepToSuccess4", "stepToSuccess5"],
+        stepsToSuccess: [4, 5],
         achieved: false
     },
     {
-        id: "learningObjective3",
+        id: 3,
         title: "Write an ending.",
-        stepsToSuccess: ["stepToSuccess3","stepToSuccess6","stepToSuccess7"],
+        stepsToSuccess: [3,6,7],
         achieved: false
     },
     {
-        id: "learningObjective4",
+        id: 4,
         title: "Write an autobiography.",
-        stepsToSuccess: ["stepToSuccess8","stepToSuccess9"],
+        stepsToSuccess: [8,9],
         achieved: false
     },
     {
-        id: "learningObjective5",
+        id: 5,
         title: "Write a diary entry.",
-        stepsToSuccess: ["stepToSuccess1","stepToSuccess2","stepToSuccess3","stepToSuccess4","stepToSuccess5","stepToSuccess10","stepToSuccess11","stepToSuccess12","stepToSuccess8"],
+        stepsToSuccess: [1,3,4,5,10,11,12,8],
         achieved: false
     },
     {
-        id: "learningObjective6",
+        id: 6,
         title: "Write a recount.",
-        stepsToSuccess: ["stepToSuccess15","stepToSuccess16","stepToSuccess8","stepToSuccess9"],
+        stepsToSuccess: [15,16,8,9],
         achieved: false
     }
   ];
 
   let stepsToSuccessSeed = [
        {
-        id: "stepToSuccess1",
+        id: 1,
         stepToSuccess: "Introduce the main character.",
         achieved: false
       },
        {
-        id: "stepToSuccess2",
+        id: 2,
         stepToSuccess: "Describe the setting.",
         achieved: false
       },
        {
-        id: "stepToSuccess3",
+        id: 3,
         stepToSuccess: "Use at least three adjectives.",
         achieved: false
       },
        {
-        id: "stepToSuccess4",
+        id: 4,
         stepToSuccess: "Use short sentences to build tension.",
         achieved: false
       },
        {
-        id: "stepToSuccess5",
+        id: 5,
         stepToSuccess: "Include an exclamation mark to show excitement.",
         achieved: false
       },
        {
-        id: "stepToSuccess6",
+        id: 6,
         stepToSuccess: "Describe the main character's feelings.",
         achieved: false
       },
        {
-        id: "stepToSuccess7",
+        id: 7,
         stepToSuccess: "Describe what the main character has learned.",
         achieved: false
       },
        {
-        id: "stepToSuccess8",
+        id: 8,
         stepToSuccess: "Use the past tense.",
         achieved: false
       },
        {
-        id: "stepToSuccess9",
+        id: 9,
         stepToSuccess: "Include time connectives.",
         achieved: false
       },
        {
-        id: "stepToSuccess10",
+        id: 10,
         stepToSuccess: "Describe feelings and emotions.",
         achieved: false
       },
        {
-        id: "stepToSuccess11",
+        id: 11,
         stepToSuccess: "Write in chronological order.",
         achieved: false
       },
        {
-        id: "stepToSuccess12",
+        id: 12,
         stepToSuccess: "Use time connectives.",
         achieved: false
       },
        {
-        id: "stepToSuccess13",
+        id: 13,
         stepToSuccess: "Begin the direct speech with a capital letter",
         achieved: false
       },
        {
-        id: "stepToSuccess14",
+        id: 14,
         stepToSuccess: "Use lowercase letters when....",
         achieved: false
       },
        {
-        id: "stepToSuccess15",
+        id: 15,
         stepToSuccess: "Include who, what, where and when",
         achieved: false
       },
        {
-        id: "stepToSuccess16",
+        id: 16,
         stepToSuccess: "Describe people, places and things",
         achieved: false
       },
        {
-        id: "stepToSuccess17",
+        id: 17,
         stepToSuccess: "todo",
         achieved: false
       }

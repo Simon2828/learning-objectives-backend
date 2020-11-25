@@ -3,10 +3,9 @@ let { learningObjectives, stepsToSuccess } = require("./seedData.ts");
 // import {learningObjectivesSeedConfig} from './seedData';
 
 const { Client } = require("pg");
-// let { connectionString } = credentials.postgres;    COMMENTED OUT OTHERWISE GETTING error TS2451: Cannot redeclare block-scoped variable 'connectionString'
+let { connectionString } = credentials.postgres;  //  COMMENTED OUT OTHERWISE GETTING error TS2451: Cannot redeclare block-scoped variable 'connectionString'
 const client = new Client({ connectionString });
 
-// ID SERIAL PRIMARY KEY
 
 const createScript = `
 CREATE TABLE IF NOT EXISTS teachers (
@@ -22,7 +21,7 @@ CREATE TABLE IF NOT EXISTS students (
 );
 
 CREATE TABLE IF NOT EXISTS learning_objectives (
-  learning_objective_id varchar(21) NOT NULL,
+  learning_objective_id SERIAL PRIMARY KEY,
   title varchar(200),
   achieved boolean,
   teacher_id INT,
@@ -30,7 +29,7 @@ CREATE TABLE IF NOT EXISTS learning_objectives (
   );
 
 CREATE TABLE IF NOT EXISTS steps_to_success (
-  step_to_success_id varchar(21) NOT NULL,
+  step_to_success_id SERIAL PRIMARY KEY,
   step_to_success varchar(200),
   achieved boolean,
   teacher_id INT,
@@ -38,8 +37,8 @@ CREATE TABLE IF NOT EXISTS steps_to_success (
 );
 
 CREATE TABLE IF NOT EXISTS learning_steps (
-  learning_objective_id varchar(21),
-  step_to_success_id varchar(21)
+  learning_objective_id INT,
+  step_to_success_id INT
 );
   `;
 
@@ -100,17 +99,15 @@ const seedStudents = async (client) => {
 const seedLearningObjectives = async (client) => {
   const sql = `
   INSERT INTO learning_objectives(
-    learning_objective_id,
     title,
     achieved,
     teacher_id,
     student_id
-  ) VALUES ($1, $2, $3, $4, $5)
+  ) VALUES ($1, $2, $3, $4)
   `;
 
   for (const [i, learningObjective] of learningObjectives.entries()) {
     await client.query(sql, [
-      learningObjective.id,
       learningObjective.title,
       learningObjective.achieved,
       1,
@@ -122,16 +119,14 @@ const seedLearningObjectives = async (client) => {
 const seedStepsToSuccess = async () => {
   const sql = `
   INSERT INTO steps_to_success(
-    step_to_success_id,
     step_to_success,
     achieved,
     teacher_id,
     student_id
-  ) VALUES ($1, $2, $3, $4, $5)
+  ) VALUES ($1, $2, $3, $4)
   `;
   for (const stepToSuccess of stepsToSuccess) {
     await client.query(sql, [
-      stepToSuccess.id,
       stepToSuccess.stepToSuccess,
       stepToSuccess.achieved,
       1,
@@ -166,6 +161,7 @@ client.connect().then(async () => {
     // await seedStudents(client);
     // await seedStepsToSuccess(client);
     // await seedLearningSteps(client);
+    // await seedLearningObjectives(client);
     // }
     // }
   } catch (err) {

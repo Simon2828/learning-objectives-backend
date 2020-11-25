@@ -1,4 +1,4 @@
-import {transformLearningObjectives} from '../../src/models';
+import {getAllTransformedLearningObjectives} from '../../src/models';
 import { assert } from 'chai';
 import * as sinon from 'sinon';
 import * as db from '../../src/db/db';
@@ -9,162 +9,162 @@ const data = [
   {
     "lo": "Write an introduction.",
     "step": "Introduce the main character.",
-    "loId": "learningObjective1",
-    "stepId": "stepToSuccess1",
+    "loId": "1",
+    "stepId": "1",
     "loAchieved": false
   },
   {
     "lo": "Write an introduction.",
     "step": "Describe the setting.",
-    "loId": "learningObjective1",
-    "stepId": "stepToSuccess2",
+    "loId": "1",
+    "stepId": "2",
     "loAchieved": false
   },
   {
     "lo": "Write an introduction.",
     "step": "Use at least three adjectives.",
-    "loId": "learningObjective1",
-    "stepId": "stepToSuccess3",
+    "loId": "1",
+    "stepId": "3",
     "loAchieved": false
   },
   {
     "lo": "Write a build up.",
     "step": "Use short sentences to build tension.",
-    "loId": "learningObjective2",
-    "stepId": "stepToSuccess4",
+    "loId": "2",
+    "stepId": "4",
     "loAchieved": false
   },
   {
     "lo": "Write a build up.",
     "step": "Include an exclamation mark to show excitement.",
-    "loId": "learningObjective2",
-    "stepId": "stepToSuccess5",
+    "loId": "2",
+    "stepId": "5",
     "loAchieved": false
   },
   {
     "lo": "Write an ending.",
     "step": "Use at least three adjectives.",
-    "loId": "learningObjective3",
-    "stepId": "stepToSuccess3",
+    "loId": "3",
+    "stepId": "3",
     "loAchieved": false
   },
   {
     "lo": "Write an ending.",
     "step": "Describe the main character's feelings.",
-    "loId": "learningObjective3",
-    "stepId": "stepToSuccess6",
+    "loId": "3",
+    "stepId": "6",
     "loAchieved": false
   },
   {
     "lo": "Write an ending.",
     "step": "Describe what the main character has learned.",
-    "loId": "learningObjective3",
-    "stepId": "stepToSuccess7",
+    "loId": "3",
+    "stepId": "7",
     "loAchieved": false
   },
   {
     "lo": "Write an autobiography.",
     "step": "Use the past tense.",
-    "loId": "learningObjective4",
-    "stepId": "stepToSuccess8",
+    "loId": "4",
+    "stepId": "8",
     "loAchieved": false
   },
   {
     "lo": "Write an autobiography.",
     "step": "Include time connectives.",
-    "loId": "learningObjective4",
-    "stepId": "stepToSuccess9",
+    "loId": "4",
+    "stepId": "9",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Introduce the main character.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess1",
+    "loId": "5",
+    "stepId": "1",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Describe the setting.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess2",
+    "loId": "5",
+    "stepId": "2",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Use at least three adjectives.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess3",
+    "loId": "5",
+    "stepId": "3",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Use short sentences to build tension.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess4",
+    "loId": "5",
+    "stepId": "4",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Include an exclamation mark to show excitement.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess5",
+    "loId": "5",
+    "stepId": "5",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Describe feelings and emotions.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess10",
+    "loId": "5",
+    "stepId": "10",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Write in chronological order.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess11",
+    "loId": "5",
+    "stepId": "11",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Use time connectives.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess12",
+    "loId": "5",
+    "stepId": "12",
     "loAchieved": false
   },
   {
     "lo": "Write a diary entry.",
     "step": "Use the past tense.",
-    "loId": "learningObjective5",
-    "stepId": "stepToSuccess8",
+    "loId": "5",
+    "stepId": "8",
     "loAchieved": false
   },
   {
     "lo": "Write a recount.",
     "step": "Include who, what, where and when",
-    "loId": "learningObjective6",
-    "stepId": "stepToSuccess15",
+    "loId": "6",
+    "stepId": "15",
     "loAchieved": false
   },
   {
     "lo": "Write a recount.",
     "step": "Describe people, places and things",
-    "loId": "learningObjective6",
-    "stepId": "stepToSuccess16",
+    "loId": "6",
+    "stepId": "16",
     "loAchieved": false
   },
   {
     "lo": "Write a recount.",
     "step": "Use the past tense.",
-    "loId": "learningObjective6",
-    "stepId": "stepToSuccess8",
+    "loId": "6",
+    "stepId": "8",
     "loAchieved": false
   },
   {
     "lo": "Write a recount.",
     "step": "Include time connectives.",
-    "loId": "learningObjective6",
-    "stepId": "stepToSuccess9",
+    "loId": "6",
+    "stepId": "9",
     "loAchieved": false
   }
 ]
@@ -326,25 +326,44 @@ const oneExpectedLearningObjective = {
   }
 };
 
-const newLearningObjective = {
-  learningObjective = 'Write something new',
-  title = "", achieved, teacherId}
+// const newLearningObjective = {
+//   learningObjective = 'Write something new',
+//   title = "", achieved, teacherId}
 
 describe('model', () => {
   let allLearningObjectivesStub = sandbox.stub(db, 'getAllLearningObjectives');
   // it('should return the transformed learning objectives with one learning objective', async () => {
   //   allLearningObjectivesStub.resolves(oneLearningObjectiveInData);
-  //   const transformedLearningObjectives = await transformLearningObjectives();
+  //   const transformedLearningObjectives = await getAllTransformedLearningObjectives();
   //   assert.deepEqual(transformedLearningObjectives, oneExpectedLearningObjective);
   // })
 
-  it('should return the transformed learning objectives', async () => {
+  it('should return all transformed learning objectives from the database', async () => {
     allLearningObjectivesStub.resolves(data);
-    const transformedLearningObjectives = await transformLearningObjectives();
+    const transformedLearningObjectives = await getAllTransformedLearningObjectives();
+    console.log('transformed:: ', JSON.stringify(transformedLearningObjectives, null, 2))
     assert.deepEqual(transformedLearningObjectives, expected);
   })
 
-  it('should add a learning objective', async() => {
-    //
+  it.only('should add a learning objective', async () => {
+    // use actual database for now and calling the db.ts file - need to update to separate out database call??
+    const title = 'Write a great story';
+
+    const loId = await db.addLearningObjective(title, false, 1);
+    console.log(loId);
+
   })
+
+  it('should add stepsToSuccess', async() => {
+    // use actual database for now and calling the db.ts file - need to update to separate out database call??
+    const title = ['Use great words', 'Use superb words', 'Use excellent words'];
+
+    db.addStepsToSuccess(title, false, 1);
+
+  });
+
+  it('should add the learning objective id and the ids of its steps to success to the database', async() => {
+    // TODO logic in models/index.ts for adding learning steps ids
+    db.addLearningStepsIds(7, [18, 19, 20]);
+  });
 })

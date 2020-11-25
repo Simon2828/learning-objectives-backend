@@ -4,7 +4,7 @@ import _, { camelCase } from "lodash";
 // TODO add typescript shape for acc?
 
 // TODO - update Promise<any>
-export async function transformLearningObjectives(): Promise<any> {
+export async function getAllTransformedLearningObjectives(): Promise<any> {
   const rows = await db.getAllLearningObjectives()
 
   return rows.map((row) => {
@@ -12,35 +12,37 @@ export async function transformLearningObjectives(): Promise<any> {
      return _.camelCase(key);
    });
  }).reduce((acc, curr, i) => {
-    if (!acc.learningObjectives.allIds.includes(curr.loId) && i > 0) {
-      acc.learningObjectives.byId = { ...acc.learningObjectives.byId, [curr.loId] : {
+   console.log("acc", acc)
+   console.log("curr", curr)
+    if (!acc.learningObjectives.allIds.includes(`learningObjective${curr.loId}`) && i > 0) {
+      acc.learningObjectives.byId = { ...acc.learningObjectives.byId, [`learningObjective${curr.loId}`] : {
         stepsToSuccess: [],
-        id: curr.loId
+        id: `learningObjective${curr.loId}`
       }
     }
   }
 
-  if (curr.loId === acc.learningObjectives.byId[curr.loId].id || i === 0) {
-     acc.learningObjectives.byId[curr.loId].title = curr.lo;
-     acc.learningObjectives.byId[curr.loId].achieved = curr.loAchieved;
-     acc.learningObjectives.byId[curr.loId].id = curr.loId;
+  if (`learningObjective${curr.loId}` === acc.learningObjectives.byId[`learningObjective${curr.loId}`].id || i === 0) {
+     acc.learningObjectives.byId[`learningObjective${curr.loId}`].title = curr.lo;
+     acc.learningObjectives.byId[`learningObjective${curr.loId}`].achieved = curr.loAchieved;
+     acc.learningObjectives.byId[`learningObjective${curr.loId}`].id = `learningObjective${curr.loId}`;
 
-     acc.learningObjectives.byId[curr.loId].stepsToSuccess = [...acc.learningObjectives.byId[curr.loId].stepsToSuccess, curr.stepId];
-     if (!acc.learningObjectives.allIds.includes(curr.loId)) {
-       acc.learningObjectives.allIds = [...acc.learningObjectives.allIds, curr.loId];
+     acc.learningObjectives.byId[`learningObjective${curr.loId}`].stepsToSuccess = [...acc.learningObjectives.byId[`learningObjective${curr.loId}`].stepsToSuccess, `stepToSuccess${curr.stepId}`];
+     if (!acc.learningObjectives.allIds.includes(`learningObjective${curr.loId}`)) {
+       acc.learningObjectives.allIds = [...acc.learningObjectives.allIds, `learningObjective${curr.loId}`];
      }
    }
 
    // check if step to success id is already in allIds
-   if (!acc.stepsToSuccess.allIds.includes(curr.stepId)) {
+   if (!acc.stepsToSuccess.allIds.includes(`stepToSuccess${curr.stepId}`)) {
     acc.stepsToSuccess.byId = {
-      ...acc.stepsToSuccess.byId, [curr.stepId] : {
-        id: curr.stepId,
+      ...acc.stepsToSuccess.byId, [`stepToSuccess${curr.stepId}`] : {
+        id: `stepToSuccess${curr.stepId}`,
         stepToSuccess: curr.step,
         achieved: false
       }
     }
-    acc.stepsToSuccess.allIds = [...acc.stepsToSuccess.allIds, curr.stepId];
+    acc.stepsToSuccess.allIds = [...acc.stepsToSuccess.allIds, `stepToSuccess${curr.stepId}`];
   }
 
   return acc;
@@ -60,4 +62,5 @@ export async function transformLearningObjectives(): Promise<any> {
 });
 
 }
+
 
