@@ -345,13 +345,17 @@ describe('model', () => {
     assert.deepEqual(transformedLearningObjectives, expected);
   })
 
-  it.only('should add a learning objective', async () => {
-    // use actual database for now and calling the db.ts file - need to update to separate out database call??
+  it('should add a learning objective', async () => {
     const title = 'Write a great story';
 
-    const loId = await db.addLearningObjective(title, false, 1);
-    console.log(loId);
-
+    // assign to loId instead of rowCount for a better test?
+    const rowCount = await db.addLearningObjective(title, false, 1, {
+      query(sql: string) {
+        return 1;
+      }
+    });
+    const expectedRows = 1;
+    assert.deepEqual(rowCount, expectedRows);
   })
 
   it('should add stepsToSuccess', async() => {
@@ -363,7 +367,13 @@ describe('model', () => {
   });
 
   it('should add the learning objective id and the ids of its steps to success to the database', async() => {
+        // use actual database for now and calling the db.ts file - need to update to separate out database call??
     // TODO logic in models/index.ts for adding learning steps ids
     db.addLearningStepsIds(7, [18, 19, 20]);
   });
+
+  // it('should edit the learning objective title of the given learning objective id', async () => {
+  //       // use actual database for now and calling the db.ts file - need to update to separate out database call??
+  //   db.updateLearningObjective(1, 'Write an introduction.');
+  // })
 })

@@ -61,12 +61,12 @@ CREATE TABLE IF NOT EXISTS learning_steps (
 // but need to change teacher_id and student_id in it - maybe all lOs should have same id?
 // Need to update steps_to_success id
 
-const getTeachersCount = async (client) => {
+const getTeachersCount = async (client: { query: (arg0: string) => PromiseLike<{ rows: any; }> | { rows: any; }; }) => {
   const { rows } = await client.query(`SELECT COUNT(*) FROM teachers`);
   return Number(rows[0].count);
 };
 
-const seedTeachers = async (client) => {
+const seedTeachers = async (client: { query: (arg0: string, arg1: string[]) => any; }) => {
   const sql = `
     INSERT INTO teachers(
       teacher_name
@@ -79,7 +79,7 @@ const seedTeachers = async (client) => {
   await client.query(sql, ["Rachel"]);
 };
 
-const seedStudents = async (client) => {
+const seedStudents = async (client: { query: (arg0: string, arg1: string[]) => any; }) => {
   const sql = `
     INSERT INTO students(
       student_name
@@ -96,7 +96,7 @@ const seedStudents = async (client) => {
 // need to restructure what i am importing...
 // const getSeedData = (data: learningObjectivesSeedConfig[]) => {
 
-const seedLearningObjectives = async (client) => {
+const seedLearningObjectives = async (client: { query: (arg0: string, arg1: any[]) => any; }) => {
   const sql = `
   INSERT INTO learning_objectives(
     title,

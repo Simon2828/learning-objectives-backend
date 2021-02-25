@@ -1,19 +1,43 @@
 import * as db from '../db/db';
 import _, { camelCase } from "lodash";
 
-// TODO add typescript shape for acc?
+interface LearningObjectivesAndStepsToSuccess {
+  learningObjectives: {
+    byId: {
+      [id: string]: LearningObjective;
+    },
+    allIds: string[];
+  },
+  stepsToSuccess: {
+    byId: {
+      [id: string]: StepToSuccess
+    },
+    allIds: string[];
+  }
+};
 
-// TODO - update Promise<any>
+interface StepToSuccess {
+  id: string;
+  stepToSuccess: string;
+  achieved: boolean;
+}
+
+interface LearningObjective {
+  id: string;
+  title: string;
+  addStepsToSuccess: string[];
+  achieved: boolean;
+}
+
+// TODO - update with type using LearningObjectivesAndStepsToSuccees interface above??
 export async function getAllTransformedLearningObjectives(): Promise<any> {
-  const rows = await db.getAllLearningObjectives()
+  const rows = await db.getAllLearningObjectives() //  ?? []; // this will override state in frontend... maybe return a fallback state the same as frontend context?
 
   return rows.map((row) => {
    return _.mapKeys(row, (value, key) => {
      return _.camelCase(key);
    });
  }).reduce((acc, curr, i) => {
-   console.log("acc", acc)
-   console.log("curr", curr)
     if (!acc.learningObjectives.allIds.includes(`learningObjective${curr.loId}`) && i > 0) {
       acc.learningObjectives.byId = { ...acc.learningObjectives.byId, [`learningObjective${curr.loId}`] : {
         stepsToSuccess: [],
@@ -58,9 +82,16 @@ export async function getAllTransformedLearningObjectives(): Promise<any> {
   stepsToSuccess: {
     byId: {},
     allIds: []
-  }
+  },
+  searchText: ''
 });
 
 }
 
+// to run with ts-node to get eg. log of rows
 
+// (async () => {
+//   await getAllTransformedLearningObjectives();
+// })().catch(err => {
+//   console.error(err);
+// });

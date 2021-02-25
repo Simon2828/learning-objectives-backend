@@ -1,9 +1,5 @@
 
-
-
-
-// TODO: update - there is a difference between testing for the routing and the api - can use tests
-// // in ibl-bundles-api routes folder as example for testing routes
+// TODO: update
 // // import * as request from 'supertest';
 // import * as sinon from 'sinon';
 // const sandbox = sinon.createSandbox();
@@ -145,10 +141,6 @@
 //     // data fixture
 //     // stub of getAllLearningObjectivesAndStepsToSuccess
 //     const getAllLearningObjectivesAndStepsToSuccessStub = {};
-
-//     // act
-
-//     // assert
 
 //   })
 // })

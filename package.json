@@ -8,31 +8,37 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "test": "mocha --require ts-node/register 'test/**/*.ts'"
+    "test": "mocha --require ts-node/register 'test/**/*.ts'",
+    "start": "npm run build && ts-node lib/index.js"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@babel/preset-typescript": "^7.8.3",
-    "@types/mocha": "^8.0.3",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/express": "^4.17.11",
+    "@types/mocha": "^8.2.0",
+    "@types/regenerator-runtime": "^0.13.0",
     "chai": "^4.2.0",
-    "mocha": "^8.2.0",
-    "sinon": "^9.2.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.2",
     "supertest": "^6.0.1",
-    "ts-node": "^9.0.0",
-    "typescript": "^3.7.5"
+    "ts-node": "^9.1.1",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "@types/chai": "^4.2.14",
-    "@types/express": "^4.17.8",
-    "@types/lodash": "^4.14.162",
-    "@types/pg": "^7.14.5",
-    "@types/sinon": "^9.0.8",
+    "@types/lodash": "^4.14.165",
+    "@types/pg": "^7.14.10",
+    "@types/sinon": "^9.0.9",
     "@types/supertest": "^2.0.10",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-openid-connect": "github:auth0/express-openid-connect",
     "lodash": "^4.17.20",
-    "pg": "^8.4.1"
+    "pg": "^8.5.1",
+    "regenerator-runtime": "^0.13.7",
+    "uuid": "^8.3.2"
   }
 }
